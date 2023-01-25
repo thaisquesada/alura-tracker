@@ -22,7 +22,7 @@ export default defineComponent({
     return {
       tempoEmSegundos: 0,
       cronometro: 0,
-      cronometroRodando: 0
+      cronometroRodando: false
     };
   },
   methods: {
