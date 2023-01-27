@@ -1,4 +1,7 @@
+import IProjeto from "./iProjeto";
+
 export default interface Tarefa {
     duracaoEmSegundos: number,
-    descricao: string
+    descricao: string,
+    projeto: IProjeto
 }
