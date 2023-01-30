@@ -34,7 +34,6 @@
 import { computed, defineComponent } from "vue";
 import Temporizador from "@/components/Temporizador.vue";
 import { useStore } from '@/store';
-import { key } from '@/store';
 import { NOTIFICAR } from "@/store/tipo-mutacoes";
 import { TipoNotificacao } from "@/interfaces/iNotificacao";
 
