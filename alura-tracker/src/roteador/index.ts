@@ -5,7 +5,6 @@ import Formulario from '@/views/Projetos/Formulario.vue'
 import Lista from '@/views/Projetos/Lista.vue'
 
 const rotas: RouteRecordRaw[] = [
-    
     {
         path: '/',
         name: 'Tarefas',
@@ -21,8 +20,8 @@ const rotas: RouteRecordRaw[] = [
                 component: Lista
             },
             {
-                path: '/novo',
-                name: 'Novo Projeto',
+                path: 'novo',
+                name: 'Novo projeto',
                 component: Formulario
             },
             {
@@ -30,7 +29,7 @@ const rotas: RouteRecordRaw[] = [
                 name: 'Editar projeto',
                 component: Formulario,
                 props: true
-            }
+            },
         ]
     }
 ]

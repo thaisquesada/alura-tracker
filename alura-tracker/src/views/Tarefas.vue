@@ -1,7 +1,7 @@
 <template>
       <Formulario @aoSalvarTarefa="salvarTarefa" />
       <div class="lista" >
-          <Box v-if="semTarefa">
+          <Box v-if="semTarefas">
             Você não está muito produtivo hoje <span class="has-text-weight-bold">:(</span>
           </Box>
           <Tarefa v-for="(tarefa, index) in tarefas" :key="index" :tarefa="tarefa" />
@@ -27,15 +27,15 @@ export default defineComponent({
       tarefas: [] as ITarefa[]
     };
   },
-  computed: {
-    semTarefa(): boolean {
-      return this.tarefas.length == 0;
-    },
-  },
   methods: {
-    salvarTarefa(tarefa: ITarefa) {
+    salvarTarefa(tarefa: ITarefa) : void {
       this.tarefas.push(tarefa);
     }
+  },
+  computed: {
+    semTarefas(): boolean {
+      return this.tarefas.length == 0;
+    },
   },
 });
 </script>

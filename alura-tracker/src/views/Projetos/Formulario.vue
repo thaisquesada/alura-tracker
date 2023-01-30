@@ -20,6 +20,7 @@
 <script lang="ts">
 import { defineComponent } from "@vue/runtime-core";
 import { useStore } from "@/store";
+import { ALTERA_PROJETO, ADICIONA_PROJETO } from '@/store/tipo-mutacoes'
 
 export default defineComponent({
   name: "Formulario",
@@ -29,7 +30,7 @@ export default defineComponent({
     }
   },
   mounted() {
-    if (this.id) {
+    if(this.id) {
       const projeto = this.store.state.projetos.find(proj => proj.id == this.id)
       this.nomeProjeto = projeto?.nome || ''
     }
@@ -42,12 +43,12 @@ export default defineComponent({
   methods: {
     salvar() {
       if (this.id) {
-        this.store.commit('ALTERA_PROJETO', {
+        this.store.commit(ALTERA_PROJETO, {
           id: this.id,
           nome: this.nomeProjeto
         })
       } else {
-        this.store.commit('ADICIONA_PROJETO', this.nomeProjeto)
+        this.store.commit(ADICIONA_PROJETO, this.nomeProjeto)
       }
       this.nomeProjeto = "";
       this.$router.push('/projetos')
