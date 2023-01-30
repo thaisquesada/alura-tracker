@@ -53,7 +53,7 @@ export default defineComponent({
       }
       this.nomeProjeto = "";
       this.store.commit(NOTIFICAR, {
-        titulo: 'NOVO PROJETO',
+        titulo: 'Novo Projeto',
         texto: 'Projeto salvo com sucesso!',
         tipo: TipoNotificacao.SUCESSO
       })
