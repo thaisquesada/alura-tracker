@@ -3,10 +3,6 @@
     {
       "id": 1,
       "nome": "Alura Tracker"
-    },
-    {
-      "nome": "Tracker",
-      "id": 2
     }
   ],
   "tarefas": [
