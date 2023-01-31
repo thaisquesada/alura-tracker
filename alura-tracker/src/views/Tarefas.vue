@@ -14,7 +14,8 @@ import Box from "@/components/Box.vue";
 import Formulario from "@/components/Formulario.vue";
 import Tarefa from "@/components/Tarefa.vue";
 import { useStore } from "@/store";
-import { OBTER_TAREFAS } from "@/store/tipo-acoes";
+import { CADASTRAR_TAREFA, OBTER_PROJETOS, OBTER_TAREFAS } from "@/store/tipo-acoes";
+import ITarefa from "@/interfaces/ITarefa";
 
 export default defineComponent({
   name: "App",
@@ -24,9 +25,9 @@ export default defineComponent({
     Tarefa,
   },
   methods: {
-    // salvarTarefa(tarefa: ITarefa) : void {
-    //   this.tarefas.push(tarefa);
-    // }
+    salvarTarefa(tarefa: ITarefa) : void {
+      this.store.dispatch(CADASTRAR_TAREFA, tarefa)
+    }
   },
   computed: {
     semTarefas(): boolean {
@@ -36,6 +37,7 @@ export default defineComponent({
   setup() {
     const store = useStore()
     store.dispatch(OBTER_TAREFAS)
+    store.dispatch(OBTER_PROJETOS)
     
     return {
       tarefas: computed(() => store.state.tarefas),
