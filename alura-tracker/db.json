@@ -1,3 +1,19 @@
 {
-  "projetos": []
+  "projetos": [
+    {
+      "id": 1,
+      "nome": "Alura Tracker"
+    }
+  ],
+  "tarefas": [
+    {
+      "id": 1,
+      "duracaoEmSegundos": 120,
+      "descricao": "configuração",
+      "projeto": {
+        "id": 1,
+        "nome": "Alura Tracker"
+      }
+    }
+  ]
 }
