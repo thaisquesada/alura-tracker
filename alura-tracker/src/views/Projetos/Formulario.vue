@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "@vue/runtime-core";
+import { defineComponent, ref } from "@vue/runtime-core";
 import { useStore } from "@/store";
 import { TipoNotificacao } from "@/interfaces/iNotificacao";
 import useNotificador from "@/hooks/notificador";
@@ -31,26 +31,15 @@ export default defineComponent({
       type: String,
     },
   },
-  mounted() {
-    if (this.id) {
-      const projeto = this.store.state.projeto.projetos.find(
-        (proj) => proj.id == this.id
-      );
-      this.nomeProjeto = projeto?.nome || "";
-    }
-  },
-  data() {
-    return {
-      nomeProjeto: "",
-    };
-  },
   methods: {
     salvar() {
       if (this.id) {
-        this.store.dispatch(ALTERAR_PROJETO, {
-          id: this.id,
-          nome: this.nomeProjeto,
-        }).then(() => this.lidarComSucesso());
+        this.store
+          .dispatch(ALTERAR_PROJETO, {
+            id: this.id,
+            nome: this.nomeProjeto,
+          })
+          .then(() => this.lidarComSucesso());
       } else {
         this.store
           .dispatch(CADASTRAR_PROJETO, this.nomeProjeto)
@@ -67,12 +56,23 @@ export default defineComponent({
       this.$router.push("/projetos");
     },
   },
-  setup() {
+  setup(props) {
     const store = useStore();
     const { notificar } = useNotificador();
+
+    const nomeProjeto = ref("")
+
+    if (props.id) {
+      const projeto = store.state.projeto.projetos.find(
+        (proj) => proj.id == props.id
+      );
+      nomeProjeto.value = projeto?.nome || "";
+    }
+
     return {
       store,
       notificar,
+      nomeProjeto
     };
   },
 });
