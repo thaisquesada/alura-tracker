@@ -9,7 +9,7 @@ export interface EstadoTarefa {
     tarefas: ITarefa[]
   }
   
-  export const tarefaModule: Module<EstadoTarefa, Estado> = {
+  export const tarefa: Module<EstadoTarefa, Estado> = {
     state: {
       tarefas: [],
     },

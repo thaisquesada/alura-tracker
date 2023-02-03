@@ -5,6 +5,19 @@
       Você não está muito produtivo hoje
       <span class="has-text-weight-bold">:(</span>
     </Box>
+    <div class="field">
+      <p class="control has-icons-left has-icons-right">
+        <input
+          class="input"
+          type="text"
+          placeholder="Digite para filtrar"
+          v-model="filtro"
+        />
+        <span class="icon is-small is-left">
+          <i class="fas fa-search"></i>
+        </span>
+      </p>
+    </div>
     <Tarefa
       v-for="(tarefa, index) in tarefas"
       :key="index"
@@ -12,7 +25,11 @@
       @aoTarefaClicada="selecionarTarefa"
     />
   </div>
-  <div class="modal" :class="{ 'is-active': tarefaSelecionada }" v-if="tarefaSelecionada">
+  <div
+    class="modal"
+    :class="{ 'is-active': tarefaSelecionada }"
+    v-if="tarefaSelecionada"
+  >
     <div class="modal-background"></div>
     <div class="modal-card">
       <header class="modal-card-head">
@@ -21,9 +38,7 @@
       </header>
       <section class="modal-card-body">
         <div class="field">
-          <label for="descricaoTarefa" class="label">
-            Descrição
-          </label>
+          <label for="descricaoTarefa" class="label"> Descrição </label>
           <input
             type="text"
             class="input"
@@ -33,7 +48,9 @@
         </div>
       </section>
       <footer class="modal-card-foot">
-        <button @click="alterarTarefa" class="button is-success">Salvar alterações</button>
+        <button @click="alterarTarefa" class="button is-success">
+          Salvar alterações
+        </button>
         <button @click="fecharModal" class="button">Cancelar</button>
       </footer>
     </div>
@@ -41,7 +58,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import Box from "@/components/Box.vue";
 import Formulario from "@/components/Formulario.vue";
 import Tarefa from "@/components/Tarefa.vue";
@@ -77,9 +94,10 @@ export default defineComponent({
       this.tarefaSelecionada = null;
     },
     alterarTarefa() {
-      this.store.dispatch(ALTERAR_TAREFA, this.tarefaSelecionada)
-        .then(() => this.fecharModal())
-    }
+      this.store
+        .dispatch(ALTERAR_TAREFA, this.tarefaSelecionada)
+        .then(() => this.fecharModal());
+    },
   },
   computed: {
     semTarefas(): boolean {
@@ -91,9 +109,18 @@ export default defineComponent({
     store.dispatch(OBTER_TAREFAS);
     store.dispatch(OBTER_PROJETOS);
 
+    const filtro = ref("");
+
+    const tarefas = computed(() =>
+      store.state.tarefa.tarefas.filter(
+        (t) => !filtro.value || t.descricao.includes(filtro.value)
+      )
+    );
+
     return {
-      tarefas: computed(() => store.state.tarefa.tarefas),
+      tarefas,
       store,
+      filtro,
     };
   },
 });
