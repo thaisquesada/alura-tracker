@@ -24,14 +24,7 @@
       :tarefa="tarefa"
       @aoTarefaClicada="selecionarTarefa"
     />
-  </div>
-  <div
-    class="modal"
-    :class="{ 'is-active': tarefaSelecionada }"
-    v-if="tarefaSelecionada"
-  >
-    <div class="modal-background"></div>
-    <div class="modal-card">
+    <Modal :mostrar="tarefaSelecionada != null">
       <header class="modal-card-head">
         <p class="modal-card-title">Editando uma tarefa</p>
         <button @click="fecharModal" class="delete" aria-label="close"></button>
@@ -53,13 +46,14 @@
         </button>
         <button @click="fecharModal" class="button">Cancelar</button>
       </footer>
-    </div>
+    </Modal>
   </div>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, ref, watchEffect } from "vue";
 import Box from "@/components/Box.vue";
+import Modal from "@/components/Modal.vue";
 import Formulario from "@/components/Formulario.vue";
 import Tarefa from "@/components/Tarefa.vue";
 import { useStore } from "@/store";
@@ -76,6 +70,7 @@ export default defineComponent({
   components: {
     Box,
     Formulario,
+    Modal,
     Tarefa,
   },
   data() {
