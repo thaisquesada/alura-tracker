@@ -1,5 +1,5 @@
 <template>
-  <div class="box formulario">
+  <div class="box">
     <div class="columns">
       <div
         class="column is-5"
@@ -33,8 +33,8 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from "vue";
 import Temporizador from "@/components/Temporizador.vue";
-import { key } from '@/store'
 import { useStore } from 'vuex';
+import { key } from '@/store';
 import { NOTIFICAR } from "@/store/tipo-mutacoes";
 import { TipoNotificacao } from "@/interfaces/iNotificacao";
 
@@ -81,6 +81,9 @@ export default defineComponent({
 </script>
 
 <style>
+.button {
+  margin-left: 8px;
+}
 .formulario {
   color: var(--texto-primario);
   background-color: var(--bg-primario);

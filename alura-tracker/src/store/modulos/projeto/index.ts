@@ -11,10 +11,13 @@ export interface EstadoProjeto {
 
 export const projetoModule: Module<EstadoProjeto, Estado> = {
     mutations: {
-        [ADICIONA_PROJETO](state, nomeDoProjeto: string) {
+        [DEFINIR_PROJETOS](state, projetos: IProjeto[]) {
+            state.projetos = projetos
+        },
+        [ADICIONA_PROJETO](state, nomeProjeto: string) {
             const projeto = {
                 id: new Date().toISOString(),
-                nome: nomeDoProjeto
+                nome: nomeProjeto
             } as IProjeto
             state.projetos.push(projeto)
         },
@@ -25,9 +28,6 @@ export const projetoModule: Module<EstadoProjeto, Estado> = {
         [EXCLUIR_PROJETO](state, id: string) {
             state.projetos = state.projetos.filter(proj => proj.id != id)
         },
-        [DEFINIR_PROJETOS](state, projetos: IProjeto[]) {
-            state.projetos = projetos
-        }
     },
     actions: {
         [OBTER_PROJETOS]({ commit }) {
@@ -45,6 +45,11 @@ export const projetoModule: Module<EstadoProjeto, Estado> = {
         [REMOVER_PROJETO]({ commit }, id: IProjeto) {
             return http.delete(`/projetos/${id}`)
                 .then(() => commit(EXCLUIR_PROJETO, id))
+        }
+    },
+    getters: {
+        projetos(state) {
+            return state.projetos
         }
     }
 }
