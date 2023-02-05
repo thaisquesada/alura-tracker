@@ -106,12 +106,6 @@ export default defineComponent({
 
     const filtro = ref("");
 
-    // const tarefas = computed(() =>
-    //   store.state.tarefa.tarefas.filter(
-    //     (t) => !filtro.value || t.descricao.includes(filtro.value)
-    //   )
-    // );
-
     watchEffect(() => {
       store.dispatch(OBTER_TAREFAS, filtro.value)
     })

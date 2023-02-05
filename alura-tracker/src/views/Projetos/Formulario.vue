@@ -80,3 +80,10 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+.label {
+  color: var(--texto-primario);
+  background-color: var(--bg-primario);
+}
+</style>
